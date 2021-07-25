@@ -10,7 +10,7 @@ const Box = styled.div`
     font-size: 14px;
     color: #2E7884;
     text-decoration: none;
-    font-weight: 800;
+    font-weight: 300;
   }
 
   .title {
@@ -58,7 +58,7 @@ const Box = styled.div`
     padding: 8px 12px;
     color: #FFFFFF;
     border-radius: 10000px;
-    background-color: #6F9200;
+    background-color: #5579A1;
   }
 `
 
