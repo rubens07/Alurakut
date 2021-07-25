@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MainGrid from '@/MainGrid';
 import Box from '@/Box';
+import RelationBox from '@/RelationBox';
 import {
   AlurakutMenu, AlurakutProfileSidebarMenuDefault,
   OrkutNostalgicIconSet
@@ -29,16 +30,15 @@ function ProfileSidebar({ user }) {
 export default function Home() {
   const user = "profileavatar.png";
   const amigos = [
-    {title: 'imagem1', image: '/imagem1.jpeg'},
-    {title: 'imagem2', image: '/imagem2.jpg'},
-    {title: 'imagem3', image: '/imagem3.jpg'},
-    {title: 'imagem4', image: '/imagem4.jpg'},
-    {title: 'imagem5', image: '/imagem5.jpg'},
-    {title: 'imagem6', image: '/imagem6.jpg'},
+    {title: 'imagem 1', image: '/imagem1.jpeg'},
+    {title: 'imagem 2', image: '/imagem2.jpg'},
+    {title: 'imagem 3', image: '/imagem3.jpg'},
+    {title: 'imagem 4', image: '/imagem4.jpg'},
+    {title: 'imagem 5', image: '/imagem5.jpg'},
+    {title: 'imagem 6', image: '/imagem6.jpg'},
   ]
 
   const [comunidades, setComunidades] = useState([]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -47,7 +47,6 @@ export default function Home() {
       image: data.get('image')
     }
     setComunidades([...comunidades, comunidade]);
-
   };
 
   return (
@@ -94,39 +93,11 @@ export default function Home() {
         </div>
         <div className="relationsArea" style={{ gridArea: "relationsArea" }}>
           <ProfileRelationsBoxWrapper>
-            <h2 className="smallTitle">
-              Amigos ({amigos.length})
-            </h2>
-            <ul>
-              {amigos.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <a href="#">
-                      <img src={`${item.image}`}/>
-                      <span>{item.title}</span>
-                    </a>
-                  </li>
-                )})
-              }
-            </ul>
+            <RelationBox title="Amigos" list={amigos} />
           </ProfileRelationsBoxWrapper>
           
           <ProfileRelationsBoxWrapper>
-            <h2 className="smallTitle">
-              Comunidades ({comunidades.length})
-            </h2>
-            <ul>
-              {comunidades.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <a href="#">
-                      <img src={`${item.image}`}/>
-                      <span>{item.title}</span>
-                    </a>
-                  </li>
-                )})
-              }
-            </ul>
+            <RelationBox title="Comunidades" list={comunidades} />
           </ProfileRelationsBoxWrapper>
         </div>
       </MainGrid>
