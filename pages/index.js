@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MainGrid from '@/MainGrid';
 import Box from '@/Box';
 import RelationBox from '@/RelationBox';
@@ -48,6 +48,10 @@ export default function Home() {
     }
     setComunidades([...comunidades, comunidade]);
   };
+
+  useEffect(() => {
+    // comando aqui
+  }, []);
 
   return (
     <>
