@@ -26,7 +26,9 @@ app.get('/api/communitys', (req, res) => {
             });
             return;
         } else{
-            res.status(200).json({
+            res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+            .status(200)
+            .json({
                 "message": "success",
                 "data": rows
             });
