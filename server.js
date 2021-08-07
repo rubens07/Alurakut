@@ -16,11 +16,14 @@ app.get("/", (req, res) => {
 
 app.get('/api/communitys', (req, res) => {
     const query = "select * from community";
-    const params = [];
 
     db.all(query, (err, rows) =>{
         if (err) {
-            res.status(400).json({"error": err.message});
+            console.error(err.message);
+            res.status(400).json({
+                "error": err.message,
+                "data": []
+            });
             return;
         } else{
             res.status(200).json({
