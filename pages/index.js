@@ -27,6 +27,8 @@ function ProfileSidebar({ user }) {
   )
 }
 
+const urlCommunity = '/api/communitys'
+
 export default function Home() {
   const user = "profileavatar.png";
   const amigos = [
@@ -46,11 +48,41 @@ export default function Home() {
       title: data.get('title'),
       image: data.get('image')
     }
-    setComunidades([...comunidades, comunidade]);
+    fetch(urlCommunity, {
+      method: "POST",
+      body: JSON.stringify(comunidade),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(async (response) => {
+      if (response.status === 200) {
+        setComunidades([...comunidades, comunidade]);
+      } else {
+        const error = await response.json();
+        console.log(error);
+      }
+    });
   };
 
   useEffect(() => {
-    // comando aqui
+    fetch(urlCommunity, {
+      method: 'GET',
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      // Possível utilizar "await response.json()" nesse ponto
+      // para jogar o resultado em uma nova variável. Nesse caso,
+      // não é necesário o "then" acima
+      const registros = response.data.map((item, index) => {
+        if (index >= 6) return;
+        return item;
+      });
+      setComunidades(registros);
+      if (response.error) {
+        console.log(response.error);
+      }
+    });
   }, []);
 
   return (
